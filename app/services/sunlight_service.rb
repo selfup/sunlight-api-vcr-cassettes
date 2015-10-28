@@ -6,7 +6,13 @@ class SunlightService
     connection.query[:apikey] = ENV["SUN_KEY"]
   end
 
-  def legislators(gender)
-    JSON.parse(connection.get("legislators", gender).body)['results']
+  def legislators(params)
+    parse(connection.get("legislators", params))['results']
+  end
+
+  private
+
+  def parse(response)
+    JSON.parse(response.body)
   end
 end
