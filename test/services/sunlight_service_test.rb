@@ -6,7 +6,7 @@ class SunlightServiceTest < ActiveSupport::TestCase
       legislators = SunlightService.new.legislators(gender: 'F')
       legislators.first
 
-      assert_equal 3, legislators.count
+      assert_equal 20, legislators.count
     end
   end
 end
