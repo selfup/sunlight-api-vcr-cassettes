@@ -1,4 +1,4 @@
-require 'test/test_helper'
+require './test/test_helper'
 
 class SunlightServiceTest < ActiveSupport::TestCase
   test '#legislators' do
