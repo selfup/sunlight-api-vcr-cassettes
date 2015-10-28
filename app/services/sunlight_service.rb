@@ -10,6 +10,10 @@ class SunlightService
     parse(connection.get("legislators", params))['results']
   end
 
+  def committees(params)
+    parse(connection.get("committees", params))['results']
+  end
+
   private
 
   def parse(response)
