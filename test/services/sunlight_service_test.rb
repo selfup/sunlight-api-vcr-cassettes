@@ -1,9 +1,15 @@
 require './test/test_helper'
 
 class SunlightServiceTest < ActiveSupport::TestCase
+  attr_reader :service
+
+  def setup
+    @service ||= SunlightService.new
+  end
+
   test '#legislators' do
     VCR.use_cassette("sunlight_service#legislators gender") do
-      legislators = SunlightService.new.legislators(gender: 'F')
+      legislators = service.legislators(gender: 'F')
       legislator = legislators.first
 
       assert_equal 20, legislators.count
@@ -11,21 +17,10 @@ class SunlightServiceTest < ActiveSupport::TestCase
       assert_equal 'Ernst', legislator["last_name"]
     end
   end
-end
 
-# test '#legislators chamber' do
-#   VCR.use_cassette("sunlight_service#legislators gender") do
-#     legislators = SunlightService.new.legislators(chamber: 'senate')
-#     legislator = legislators.first
-#
-#     assert_equal 20, legislators.count
-#   end
-# end
-
-class SunlightServiceTest < ActiveSupport::TestCase
   test '#legislators chamber' do
     VCR.use_cassette("sunlight_service#legislators chamber") do
-      legislators = SunlightService.new.legislators(chamber: 'senate')
+      legislators = service.legislators(chamber: 'senate')
       legislator = legislators.first
 
       assert_equal 20, legislators.count
