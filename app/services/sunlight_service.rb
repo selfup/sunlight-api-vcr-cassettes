@@ -7,6 +7,6 @@ class SunlightService
   end
 
   def legislators(gender)
-    connection.get("legislators", gender)
+    JSON.parse(connection.get("legislators", gender).body)
   end
 end

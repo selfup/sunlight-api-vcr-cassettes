@@ -2,9 +2,11 @@ require './test/test_helper'
 
 class SunlightServiceTest < ActiveSupport::TestCase
   test '#legislators' do
-    legislators = SunlightService.new.legislators(gender: 'F')
-    legislators.first
+    VCR.use_cassette("sunlight_service#legislators") do
+      legislators = SunlightService.new.legislators(gender: 'F')
+      legislators.first
 
-    assert_count 0, legislators.count
+      assert_equal 3, legislators.count
+    end
   end
 end
